@@ -6,13 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,6 +18,7 @@ import com.akihiro.instagramclone.presentation.SplashScreen
 import com.akihiro.instagramclone.presentation.authentication.AuthenticationViewModel
 import com.akihiro.instagramclone.presentation.authentication.LoginScreen
 import com.akihiro.instagramclone.presentation.authentication.SignUpScreen
+import com.akihiro.instagramclone.presentation.authentication.main.FeedScreen
 import com.akihiro.instagramclone.ui.theme.InstagramCloneTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,13 +45,17 @@ class MainActivity : ComponentActivity() {
 fun InstagramCloneApp(navigator: NavHostController,authViewModel:AuthenticationViewModel) {
     NavHost(navController = navigator, startDestination = Screens.SplashScreen.route){
         composable(route = Screens.LoginScreen.route){
-            LoginScreen()
+            LoginScreen(navController = navigator,viewModel = authViewModel)
         }
         composable(route = Screens.SignUpScreen.route){
             SignUpScreen()
         }
         composable(route = Screens.SplashScreen.route){
             SplashScreen(navController = navigator, authViewModel = authViewModel)
+        }
+        
+        composable(route = Screens.FeedScreen.route){
+           FeedScreen()
         }
     }
 }
