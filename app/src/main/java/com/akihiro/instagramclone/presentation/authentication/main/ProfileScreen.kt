@@ -10,11 +10,11 @@ import com.akihiro.instagramclone.presentation.authentication.BottomNavigationIt
 import com.akihiro.instagramclone.presentation.authentication.BottomNavigationMenu
 
 @Composable
-fun FeedScreen(navController: NavController) {
+fun ProfileScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()){
         Column(modifier = Modifier.weight(1f)){
-            Text(text = "Feed Screen")
+            Text(text = "Profile Screen")
         }
-        BottomNavigationMenu(selectedItem = BottomNavigationItem.FEED, navController = navController)
+        BottomNavigationMenu(selectedItem = BottomNavigationItem.PROFILE, navController = navController)
     }
 }
