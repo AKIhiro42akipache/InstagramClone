@@ -19,6 +19,8 @@ import com.akihiro.instagramclone.presentation.authentication.AuthenticationView
 import com.akihiro.instagramclone.presentation.authentication.LoginScreen
 import com.akihiro.instagramclone.presentation.authentication.SignUpScreen
 import com.akihiro.instagramclone.presentation.authentication.main.FeedScreen
+import com.akihiro.instagramclone.presentation.authentication.main.ProfileScreen
+import com.akihiro.instagramclone.presentation.authentication.main.SearchScreen
 import com.akihiro.instagramclone.ui.theme.InstagramCloneTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,21 +43,30 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
-fun InstagramCloneApp(navigator: NavHostController,authViewModel:AuthenticationViewModel) {
-    NavHost(navController = navigator, startDestination = Screens.SplashScreen.route){
-        composable(route = Screens.LoginScreen.route){
-            LoginScreen(navController = navigator,viewModel = authViewModel)
+fun InstagramCloneApp(navigator: NavHostController, authViewModel: AuthenticationViewModel) {
+    NavHost(navController = navigator, startDestination = Screens.SplashScreen.route) {
+        composable(route = Screens.LoginScreen.route) {
+            LoginScreen(navController = navigator, authViewModel)
         }
-        composable(route = Screens.SignUpScreen.route){
-            SignUpScreen()
+        composable(route = Screens.SignUpScreen.route) {
+            SignUpScreen(navigator, authViewModel)
         }
-        composable(route = Screens.SplashScreen.route){
+        composable(route = Screens.SplashScreen.route) {
             SplashScreen(navController = navigator, authViewModel = authViewModel)
         }
-        
-        composable(route = Screens.FeedScreen.route){
-           FeedScreen()
+
+        composable(route = Screens.FeedScreen.route) {
+            FeedScreen(navController = navigator)
+        }
+
+        composable(route = Screens.ProfileScreen.route) {
+            ProfileScreen(navController = navigator)
+        }
+
+        composable(route = Screens.SearchScreen.route) {
+            SearchScreen(navController = navigator)
         }
     }
 }
